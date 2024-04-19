@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Todo < ApplicationRecord
+  # TODO: Create query objects for todo
+  # to extact the queries and scopes into a specific todo query object
+  # include TodoQueries
   attr_accessor :completed
 
   belongs_to :todo_list, required: true, inverse_of: :todos

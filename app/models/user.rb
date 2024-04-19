@@ -9,6 +9,7 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :email, presence: true, format: URI::MailTo::EMAIL_REGEXP, uniqueness: true
   validates :token, presence: true, length: { is: 36 }, uniqueness: true
+  # use a gem like bcrypt to hash the password
   validates :password_digest, presence: true, length: { is: 64 }
 
   after_create :create_default_todo_list

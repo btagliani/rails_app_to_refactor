@@ -11,12 +11,15 @@ class TodoListsController < ApplicationController
   end
 
   def index
+    # TODO: Create a presenter for todo lists,
+    # lets do this every time we display an object in a controller action
     todo_lists = @todo_lists.order_by(params).map(&:serialize_as_json)
 
     render_json(200, todo_lists: todo_lists)
   end
 
   def create
+    # TODO: Create service object for todo list creation
     todo_list = @todo_lists.create(todo_list_params)
 
     if todo_list.valid?

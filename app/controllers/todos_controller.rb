@@ -14,12 +14,15 @@ class TodosController < ApplicationController
   end
 
   def index
+    # TODO: Create a presenter for todos
+    # its a way to encapsulate the logic of displaying todos, SRP and DRY principles apply here.
     todos = @todos.filter_by_status(params).order_by(params).map(&:serialize_as_json)
 
     render_json(200, todos:)
   end
 
   def create
+    # TODO: Create service object for todo creation
     todo = @todos.create(todo_params.except(:completed))
 
     if todo.valid?
@@ -58,6 +61,7 @@ class TodosController < ApplicationController
   def incomplete
     @todo.incomplete!
 
+    # TODO: Use presenter for todo
     render_json(200, todo: @todo.serialize_as_json)
   end
 
@@ -65,6 +69,7 @@ class TodosController < ApplicationController
 
     def todo_lists_only_non_default? = false
 
+    # Refactor into a cleaner and more readable way
     def set_todos
       scope =
         if params[:todo_list_id].present?

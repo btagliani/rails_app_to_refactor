@@ -27,6 +27,7 @@ class ApplicationController < ActionController::API
       render_json(400, error: exception.message)
     end
 
+    # Move this to a TodoList concern than we can reuse it in the TodoController
     def set_todo_lists
       user_todo_lists = current_user.todo_lists
 

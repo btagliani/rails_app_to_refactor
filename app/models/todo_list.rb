@@ -8,6 +8,7 @@ class TodoList < ApplicationRecord
   scope :default, -> { where(default: true) }
   scope :non_default, -> { where(default: false) }
 
+  # TODO: Extract this logic into a query object, refactor into a cleaner and more readable way
   scope :order_by, ->(params) {
     order = params[:order]&.strip&.downcase == 'asc' ? :asc : :desc
 
@@ -22,6 +23,8 @@ class TodoList < ApplicationRecord
   validates :default, inclusion: { in: [true, false] }
   validate :default_uniqueness
 
+  # TODO: This is not that bad, but we should think of using a gem like FastJSONApi to generate the JSON
+  # we can even get this as json from the database, something to look into.
   def serialize_as_json
     as_json(except: [:user_id])
   end
